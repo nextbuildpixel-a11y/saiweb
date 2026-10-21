@@ -20,7 +20,11 @@ function AdminLoginPage() {
       await loginAdmin(email, password);
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Admin Authentication failed. Access restricted.');
+      if (!err.response) {
+        setError('Cannot connect to backend server. Ensure your backend is deployed/running and reachable.');
+      } else {
+        setError(err.response?.data?.error || 'Admin Authentication failed. Access restricted.');
+      }
     } finally {
       setLoading(false);
     }

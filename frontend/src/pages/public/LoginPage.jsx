@@ -20,7 +20,11 @@ function LoginPage() {
       await loginStudent(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+      if (!err.response) {
+        setError('Cannot connect to backend server. Ensure your backend is deployed/running and reachable.');
+      } else {
+        setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+      }
     } finally {
       setLoading(false);
     }
