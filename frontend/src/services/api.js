@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '/api' : 'http://localhost:8080/api'),
+  baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '/api' : 'https://ai-interview-coach-backend-y1c5.onrender.com/api'),
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 35000,
 });
 
 // Request interceptor to attach JWT token when available

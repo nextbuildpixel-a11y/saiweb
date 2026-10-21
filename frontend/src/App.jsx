@@ -30,7 +30,7 @@ function App() {
       const response = await api.get('/health');
       setHealthStatus(response.data);
     } catch (err) {
-      setError(err.message || 'Failed to connect to Spring Boot Backend API at http://localhost:8080');
+      setError(err.message || 'Failed to connect to Spring Boot Backend API');
       setHealthStatus(null);
     } finally {
       setLoading(false);
@@ -144,7 +144,7 @@ function App() {
                 {healthStatus ? healthStatus.service : loading ? 'Checking HTTP endpoint...' : 'Disconnected'}
               </div>
               <div className="text-[11px] text-slate-500 font-mono">
-                Port: 8080 | Base: http://localhost:8080/api
+                Base: {api.defaults.baseURL}
               </div>
             </div>
 
