@@ -1,13 +1,13 @@
-# Multi-stage Dockerfile for Spring Boot Backend
+# Multi-stage Dockerfile for Spring Boot Backend (Root Context)
 FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Copy pom.xml and download dependencies
-COPY pom.xml .
+# Copy pom.xml from backend directory and pre-fetch dependencies
+COPY backend/pom.xml ./pom.xml
 RUN mvn dependency:go-offline -B
 
-# Copy source code and build production jar
-COPY src ./src
+# Copy backend source code and package application jar
+COPY backend/src ./src
 RUN mvn clean package -DskipTests -B
 
 # Stage 2: Minimal JRE Runtime
